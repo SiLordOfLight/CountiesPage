@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Information on the state of {{state_name}}</title>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <h1>{{state}}</h1>
+    <h2>{{state_name}}</h2>
+    <br><br>
+
+    <p>
+      Total Population: {{sdata["population"]}} <br>
+      Number of Counties: {{sdata["num_counties"]}} <br>
+      Population Increase since 2010: {{sdata["percent_increase"]}}% <br>
+      Ethnic Breakdown: <br>
+    </p>
+  </body>
+</html>

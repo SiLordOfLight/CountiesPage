@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  States Fun Facts
+{% endblock %}
+
+{% block fun_fact %}
+  {% if not ff_num == -1 %}
+    A total of {{ff_num}} people in the state of {{state}} are foreign-born.
+  {% endif %}
+{% endblock %}
+
+{% block fun_fact2 %}
+  {% if not ff_num2 == -1 %}
+    There are {{ff_num2}} veterans in {{county}}.
+  {% endif %}
+{% endblock %}
