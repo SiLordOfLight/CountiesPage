@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  {% set page_title = "Information on "+cdata["County"]+" ("+cdata["State"]+")" %}
+  {% include "header.html" %}
+  <body>
+    <h1>{{cdata["County"]}}</h1>
+    <h2>{{cdata["State"]}}</h2>
+    <br><br>
+
+    <h4>Population:</h4>
+    <p class="tab">
+      Total Population as of 2014: {{cdata["Population"]["2014 Population"]}}<br>
+      Population Change Since 2010: {{cdata["Population"]["Population Percent Change"]}}%<br>
+      Population Density (per Sqare Mile): {{cdata["Population"]["Population per Square Mile"]}}<br>
+    </p>
+
+    <h4>Ethnicity Breakdown:</h4>
+    <p class="tab">
+      White: {{cdata["Ethnicities"]["White Alone, not Hispanic or Latino"]}}%<br>
+      African American: {{cdata["Ethnicities"]["Black Alone"]}}%<br>
+      Asian: {{cdata["Ethnicities"]["Asian Alone"]}}%<br>
+      Hispanic or Latino: {{cdata["Ethnicities"]["Hispanic or Latino"]}}%<br>
+      Other: {{100 - cdata["Ethnicities"]["White Alone, not Hispanic or Latino"] - cdata["Ethnicities"]["Black Alone"] - cdata["Ethnicities"]["Asian Alone"] - cdata["Ethnicities"]["Hispanic or Latino"]}}%<br>
+    </p>
+
+    <h4>Age Breakdown:</h4>
+    <p class="tab">
+      0 - 4 Years Old: {{cdata["Age"]["Percent Under 5 Years"]}}%<br>
+      5 - 17 Years Old: {{cdata["Age"]["Percent Under 18 Years"] - cdata["Age"]["Percent Under 5 Years"]}}%<br>
+      18 - 64 Years Old: {{100 - (cdata["Age"]["Percent Under 18 Years"] + cdata["Age"]["Percent 65 and Older"])}}%<br>
+      65+ Years Old: {{cdata["Age"]["Percent 65 and Older"]}}%<br>
+    </p>
+
+    <h4>Gender:</h4>
+    <p class="tab">
+      Male: {{100 - cdata["Miscellaneous"]["Percent Female"]}}%<br>
+      Female: {{cdata["Miscellaneous"]["Percent Female"]}}%<br>
+    </p>
+
+    <h4>Income:</h4>
+    <p class="tab">
+      Median Household Income: ${{cdata["Income"]["Median Houseold Income"]}}<br>
+      Income per Capita: ${{cdata["Income"]["Per Capita Income"]}}<br>
+      Persons Below Poverty Level: {{cdata["Income"]["Persons Below Poverty Level"]}}<br>
+    </p>
+
+  </body>
+</html>

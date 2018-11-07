@@ -1,17 +1,24 @@
-{% extends "layout.html" %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  {%set page_title = "The 50 States"%}
+  {% include "header.html" %}
 
-{% block title %}
-  States Fun Facts
-{% endblock %}
+  <body>
+    <h1 style="margin: auto; text-align: center;">The 50 States of the United States of America</h1>
 
-{% block fun_fact %}
-  {% if not ff_num == -1 %}
-    A total of {{ff_num}} people in the state of {{state}} are foreign-born.
-  {% endif %}
-{% endblock %}
+    <br><br>
 
-{% block fun_fact2 %}
-  {% if not ff_num2 == -1 %}
-    There are {{ff_num2}} veterans in {{county}}.
-  {% endif %}
-{% endblock %}
+    {% set options_type = "state" %}
+    {% set current = state %}
+    {% set location = "" %}
+    {% include "selector.html" %}
+
+    {% if display_mode == true %}
+    <h3> View information on the state of <a href="/stateInfo?state={{state}}">{{state}}</a></h3>
+    {%endif%}
+
+    <br><br>
+
+    <img src="https://i1.wp.com/ctgeoalliance.org/wp-content/uploads/2017/07/USA-Map-showing-50-states-compressor.jpg" alt="Nope" style="width: 100%;">
+  </body>
+</html>

@@ -13,16 +13,40 @@ def render_main():
     states = dfx.getStates(counties)
 
     try:
-        state = request.args["opt-seler"]
-        state_counties = dfx.getCounties(state, counties)
-        try:
-            county = request.args["opt-seler2"]
-            return render_template('states.html', opts = states, ff_num=dfx.total_foreign_born(state,counties), state=state, opts2=state_counties, county=county, ff_num2=dfx.getVeterans(county,state,counties))
-        except:
-            return render_template('states.html', opts = states, ff_num=dfx.total_foreign_born(state,counties), state=state, opts2=state_counties, county="", ff_num2 = -1)
-    except:
-        return render_template('states.html', opts = states, ff_num=-1, ff_num2=-1, opts2=[], state="")
+        state = request.args["state-result"]
 
+        return render_template("states.html", opts=states, state=state, display_mode=True)
+    except:
+        return render_template("states.html", opts=states, state="AL")
+
+@app.route("/stateInfo")
+def render_state_info():
+    with open('county_demographics.json') as demographics_data:
+        counties = json.load(demographics_data)
+
+    state = request.args["state"]
+
+    sdata = dfx.getStateInfo(state, counties)
+
+    stateCounties = dfx.getCounties(state,counties)
+
+    try:
+        county = request.args["county-result"]
+
+        return render_template("stateInfo.html", sdata=sdata, state=state, state_name=dfx.getStateName(state), county=county, opts=stateCounties)
+    except:
+        return render_template("stateInfo.html", sdata=sdata, state=state, state_name=dfx.getStateName(state), county="nil", opts=stateCounties)
+
+@app.route("/countyInfo")
+def render_county_info():
+    with open('county_demographics.json') as demographics_data:
+        counties = json.load(demographics_data)
+
+    countyName = request.args["county-result"]
+
+    county = dfx.getCounty(countyName, counties)
+
+    return render_template("countyInfo.html", cdata=county)
 
 
 if __name__=="__main__":

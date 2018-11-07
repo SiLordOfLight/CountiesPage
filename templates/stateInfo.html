@@ -1,27 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Information on the state of {{state_name}}</title>
-
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-  </head>
+  {%set page_title = "Information on the State of "+state_name %}
+  {% include "header.html" %}
   <body>
-    <h1>{{state}}</h1>
-    <h2>{{state_name}}</h2>
+    <div class="row">
+      <div class="col-12">
+        <h1>{{state}}</h1> <br>
+        <h2>{{state_name}}</h2>
+      </div>
+    </div>
+
     <br><br>
 
-    <p>
-      Total Population: {{sdata["population"]}} <br>
-      Number of Counties: {{sdata["num_counties"]}} <br>
-      Population Increase since 2010: {{sdata["percent_increase"]}}% <br>
-      Ethnic Breakdown: <br>
-    </p>
+    <div class="row">
+      <div class="col-4">
+        <p>
+          Total Population: {{sdata["population"]}} <br>
+          Number of Counties: {{sdata["num_counties"]}} <br>
+          Population Increase since 2010: {{sdata["population_increase"]}} <br>
+          Ethnic Breakdown: <br>
+          <p class="tab">
+            White: {{sdata["white_percent"]}}% <br>
+            African American: {{sdata["afam_percent"]}}% <br>
+            Asian: {{sdata["asian_percent"]}}% <br>
+            Hispanic or Latino: {{sdata["latino_percent"]}}% <br>
+            Other: {{sdata["other_percent"]}}%
+          </p>
+        </p>
+      </div>
+    </div>
+
+
+    <div class="row">
+      {% set options_type = "county" %}
+      {% set current = county %}
+      {% set location = "countyInfo" %}
+      {% include "selector.html" %}
+    </div>
+
+    {%if not county == "nil" %}
+    <div class="row">
+      <h3> View information on the {{state_name}} county of <a href="/countyInfo?county={{county}}">{{county}}</a></h3>
+    </div>
+    {% endif %}
+
   </body>
 </html>
